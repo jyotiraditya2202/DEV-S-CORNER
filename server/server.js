@@ -7,11 +7,15 @@ import userRouter from './routes/UserRoutes.js';
 dotenv.config();
 const app = express();
 
-app.use(cors());
+const allowedOrigins = ['https://dev-s-corner-1.onrender.com'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json())
 connectdb();
-
-app.use(express.json());
 
 app.use('/api', userRouter);
 
