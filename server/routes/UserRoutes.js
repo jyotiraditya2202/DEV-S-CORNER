@@ -24,10 +24,10 @@ router.post('/user/login',async(req,res) => {
 });
 
 router.post('/user/register',async(req,res) => {
-  const { name, password } = req.body;
+  const { email ,name, password } = req.body;
 
   try {
-    const newUser = new User({ name, password });
+    const newUser = new User({ email, name, password });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully!' });
   } 
