@@ -1,6 +1,8 @@
+import React from 'react';
 import './Login.css'
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import api from '../../api/axios.js';
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
@@ -26,6 +28,7 @@ export default function LogInForm() {
             const data = await response.json();
                 if (response.ok) {
                     alert('Login successful!');
+                    localStorage.setItem('token', data.token);
                     console.log(data);
                 } else {
                     alert(data.error || 'Login failed');
@@ -37,7 +40,7 @@ export default function LogInForm() {
 
     const HandleRegister = async(e) => {
         e.preventDefault();
-
+        
         try{
             const response = await fetch(`${BASE_URL}/api/user/register`,{
                 method: 'POST',
@@ -50,6 +53,7 @@ export default function LogInForm() {
             const data = await response.json();
             if (response.ok) {
                 alert('register successful!');
+                localStorage.setItem('token', data.token);
                 console.log(data);
             } else {
                 alert(data.error || 'register failed');

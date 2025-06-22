@@ -7,7 +7,10 @@ import userRouter from './routes/UserRoutes.js';
 dotenv.config();
 const app = express();
 
-const allowedOrigins = ['https://dev-s-corner-1.onrender.com'];
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? ['https://dev-s-corner-1.onrender.com']
+  : ['http://localhost:5173'];
+
 
 app.use(cors({
   origin: allowedOrigins,
