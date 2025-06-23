@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import api from '../../api/axios.js';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-
 export default function LogInForm() {
     const [showLogin, setshowLogin] = useState(true);
     const [name , setName] = useState('');
@@ -13,25 +11,19 @@ export default function LogInForm() {
     const [email, setMail] = useState('');
 
     const HandleLogin = async(e) => {
-
         e.preventDefault();
-
         try{
-            const response = await fetch(`${BASE_URL}/api/user/login`,{
-                method: 'POST',
-                headers:{
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({name, password}),
-            });
+            const response = await api.post('/user/login', { name, password });
 
-            const data = await response.json();
-                if (response.ok) {
+            const data = response.data;
+
+                if (response.status === 200 || response.status === 201) {
                     alert('Login successful!');
-                    localStorage.setItem('token', data.token);
-                    console.log(data);
+                    // localStorage.setItem('token', data.token);
+                    console.log("Token seted securely");
                 } else {
                     alert(data.error || 'Login failed');
+                    console.log("this is error",response);
                 }
                 } catch (err) {
                 console.error('Login error:', err);
@@ -42,27 +34,21 @@ export default function LogInForm() {
         e.preventDefault();
         
         try{
-            const response = await fetch(`${BASE_URL}/api/user/register`,{
-                method: 'POST',
-                headers:{
-                'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({email, name, password})
-            });
+            const response = await api.post('/user/register', { email, name, password });
 
-            const data = await response.json();
-            if (response.ok) {
+            const data = response.data;
+
+            if (response.status === 200 || response.status === 201) {
                 alert('register successful!');
-                localStorage.setItem('token', data.token);
-                console.log(data);
+                // localStorage.setItem('token', data.token);
+                console.log("Token seted securely");
             } else {
                 alert(data.error || 'register failed');
+                console.log(response);
             }
             } catch (err) {
             console.error('register error:', err);
             }
-        
-
     }
 
     const formVariants = {

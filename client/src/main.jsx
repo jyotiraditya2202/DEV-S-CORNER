@@ -7,5 +7,5 @@ import LogInForm from './pages/login/Login.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>  
     <LogInForm />
-  </StrictMode>,
+  </StrictMode>
 )

@@ -119,3 +119,56 @@ button:active {
   color: #002fff;
   text-decoration: underline;
 }
+
+@media (max-width: 769px) {
+  /* Container setup */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background:#e0e0e0;;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Right banner design */
+  .right-side {
+    position: absolute;
+    top: -2rem;
+    right: -2rem;
+    background-color: #ccff00;
+    color: black;
+    font-weight: 900;
+    padding: 1.5rem;
+    border-bottom-left-radius: 6rem;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    line-height: 1.2;
+    font-size: 1.6rem;
+    z-index: 1;
+    height: 44%;
+    width: 60vw;
+  }
+
+  /* Card layout */
+  .left-side {
+    position: relative;
+    z-index: 2;
+    margin-top: 6rem;
+    background: transparent;
+   
+  }
+  /* Form container style */
+  .login-card {
+    background-color: #ddd;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+ 
+
+

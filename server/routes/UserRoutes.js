@@ -19,6 +19,13 @@ router.post('/user/login',async(req,res) => {
       expiresIn: '1d',
     });
 
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false, 
+      sameSite: 'Strict', 
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.status(200).json({ token, user: { id: user._id, name: user.name, email: user.email } });
   }
 
@@ -27,7 +34,6 @@ router.post('/user/login',async(req,res) => {
   }
 
 });
-
 router.post('/user/register',async(req,res) => {
   const { email ,name, password } = req.body;
 
@@ -37,6 +43,13 @@ router.post('/user/register',async(req,res) => {
     await newUser.save();
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '1d',
+    });
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: false, 
+      sameSite: 'Strict', 
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({ token, user: { id: newUser._id, name: newUser.name, email: newUser.email } });
