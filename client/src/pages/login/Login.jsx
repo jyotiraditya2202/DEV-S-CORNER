@@ -1,5 +1,5 @@
 import React from 'react';
-import './Login.css'
+import './Login.css';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import api from '../../api/axios.js';
